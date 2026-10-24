@@ -1,6 +1,6 @@
 const productModel = require('../Models/productModel');
 
-// phân trang, tìm kiếm, lọc theo danh mục, đánh giá
+// phân trang, tìm kiếm, lọc theo danh mục, đánh giá, người dùng (userId) 
 const getAllProducts = async (req, res) => {
     try {
         const products = await productModel.find();
