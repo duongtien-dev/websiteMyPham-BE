@@ -7,6 +7,7 @@ const productRouter = require('./Routes/productRoutes');
 const cusRouter = require('./Routes/customerRoutes');
 const adminRouter = require('./Routes/adminRoutes');
 const checkoutRouter = require('./Routes/checkoutRoutes');
+const postRouter = require('./Routes/postRoutes');
 
 // 5000
 
@@ -32,6 +33,8 @@ app.use('/api/customer', cusRouter);
 app.use('/api/products', productRouter);
 
 app.use('/api/checkout', checkoutRouter);
+
+app.use('/api/posts', postRouter); // tạo tuyến cha
 
 const PORT = process.env.PORT || 5000;
 const URI = process.env.ATLAS_URI;
