@@ -11,7 +11,12 @@ const productSchema = new mongoose.Schema(
         discountPercentage: { type: Number, default: 0 },
         rating: { type: Number, default: 0 },
         brand: { type: String },
-        category: { type: String },
+        category: { 
+            // type: String
+            type: mongoose.Schema.Types.ObjectId, // _id
+            ref: "Category",
+            require: true
+        },
         images: { type: Array },
     },
     {
