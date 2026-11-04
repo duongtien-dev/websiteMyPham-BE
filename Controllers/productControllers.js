@@ -28,8 +28,23 @@ const getOneProduct = async (req, res) => {
 
 const createOneProduct = async (req, res) => {
     try {
-        const newProduct = await productModel.create(req.body);
-        res.status(200).json(newProduct);
+        const newProduct = req.body;
+        // const { title, description, } = req.body // destructring
+
+        // check categoryId xem có tồn tại hay không ?
+        const categoryExists = await categoryModel.findById(newProduct.categoryId);
+
+        if(!categoryExists) {
+            return res.status(404).json({ message: "Category not found" });
+        }
+
+        const product = await productModel.create({
+            ...newProduct,
+            category: newProduct.categoryId
+        })
+        
+        // const newProduct = await productModel.create(req.body); // category
+        res.status(200).json({ message: "", data: product});
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
