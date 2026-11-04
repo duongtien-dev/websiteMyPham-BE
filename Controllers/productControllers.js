@@ -3,8 +3,10 @@ const productModel = require('../Models/productModel');
 // phân trang, tìm kiếm, lọc theo danh mục, đánh giá, người dùng (userId) 
 const getAllProducts = async (req, res) => {
     try {
-        const products = await productModel.find();
-        res.status(200).json(products); // ApiRes.success(product)
+        const products = await productModel.find()
+            .populate('category')
+            .sort({ createdAt: -1 }); // -1 newest, 1 oldest
+        res.status(200).json({ message: "", data: products }); // ApiRes.success(product)
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
